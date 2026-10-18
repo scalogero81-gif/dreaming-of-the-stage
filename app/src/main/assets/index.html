@@ -16,7 +16,20 @@ html.app .mus{position:fixed;top:8px;right:12px;z-index:5;opacity:.8;margin:0}
 html.app .touch{display:flex!important;position:fixed;left:0;right:0;bottom:12px;max-width:none;padding:0 20px;box-sizing:border-box;pointer-events:none;z-index:4}
 html.app .touch .pad{pointer-events:auto}
 html.app .touch button{opacity:.75;width:64px;height:64px}
-html.app .wrap:has(#menu:not([hidden])) ~ .touch{display:none!important}
+[hidden]{display:none!important}
+html.inmenu .touch{display:none!important}
+html.app .overlay{justify-content:center;gap:1.6vh;padding:2vh 16px;overflow-y:auto;box-sizing:border-box}
+html.app .overlay h2{font-size:min(6.5vh,34px);line-height:1.1}
+html.app .overlay p{display:block;font-size:min(2.8vh,14px);max-width:70ch}
+html.app .overlay .vs{gap:2vw;flex-wrap:nowrap}
+html.app .pickc{width:auto;max-width:34vw;padding:1.2vh 12px;gap:.6vh}
+html.app .pickc canvas{width:auto;max-width:none;height:min(34vh,180px)}
+html.app .pickc b{font-size:min(4vh,18px)}
+html.app .pickc small{font-size:min(2.5vh,12px)}
+html.app .card{padding:1.2vh 12px;min-width:0}
+html.app .card b{font-size:min(4vh,18px)}
+html.app .overlay button{padding:1.1vh 18px;font-size:min(3vh,15px)}
+html.app .mus{font-size:12px;padding:5px 12px}
 </style>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +85,7 @@ kbd{font-family:var(--body);font-size:12px;background:#24182f;border:1px solid #
 <div class="wrap">
   <canvas id="c" width="960" height="540" aria-label="Palco del combattimento"></canvas>
   <div class="overlay" id="menu">
-    <h2>Stasera sul palco</h2>
+    <h2>Dreaming of the Stage</h2>
     <div class="vs">
       <div class="card p1c"><b>Nova Vega</b><small>Star del pop · paillettes e piroette</small></div>
       <span style="font-family:var(--display);font-size:24px">VS</span>
@@ -439,6 +452,8 @@ function draw(){
 p1=mk('nova',260,1);p2=mk('rex',700,-1);
 function loop(){if(state!=='menu')update();else{p1.t++;p2.t++}draw();if(previews.length)drawPreviews();requestAnimationFrame(loop)}
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(state==='fight')paused=true;if(ac)ac.suspend()}else if(ac)ac.resume()});
+const syncMenu=()=>document.documentElement.classList.toggle('inmenu',!menu.hidden);
+new MutationObserver(syncMenu).observe(menu,{attributes:true,attributeFilter:['hidden']});syncMenu();
 loop();
 })();
 </script>

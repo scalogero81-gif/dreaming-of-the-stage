@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -26,6 +27,7 @@ public class MainActivity extends Activity {
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         s.setMediaPlaybackRequiresUserGesture(false);
+        web.addJavascriptInterface(new ExitBridge(), "Android");
         setContentView(web);
 
         if (savedInstanceState != null) {
@@ -34,6 +36,14 @@ public class MainActivity extends Activity {
             web.loadUrl("file:///android_asset/index.html");
         }
         hideSystemBars();
+    }
+
+    /** Usato dal pulsante "Esci dal gioco": chiude l'app. */
+    private class ExitBridge {
+        @JavascriptInterface
+        public void exit() {
+            runOnUiThread(() -> finishAndRemoveTask());
+        }
     }
 
     private void hideSystemBars() {

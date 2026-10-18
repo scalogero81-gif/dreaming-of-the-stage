@@ -14,9 +14,22 @@ android {
         versionName '1.0'
     }
 
+    signingConfigs {
+        fixed {
+            storeFile file('dots-debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.fixed
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.fixed
         }
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- fasci di luce -->
+    <path android:fillColor="#553FE0E8" android:pathData="M40,30 L46,30 L36,84 L20,84 Z" />
+    <path android:fillColor="#55FF4D5E" android:pathData="M62,30 L68,30 L88,84 L72,84 Z" />
+    <!-- stella del palco -->
+    <path android:fillColor="#FFC94A"
+        android:pathData="M54,30 L59.3,44.6 L74.8,45.1 L62.6,54.7 L66.9,69.6 L54,60.9 L41.1,69.6 L45.4,54.7 L33.2,45.1 L48.7,44.6 Z" />
+    <!-- assi del palco -->
+    <path android:fillColor="#FFC94A" android:pathData="M24,76 L84,76 L84,79 L24,79 Z" />
+</vector>
